@@ -1,0 +1,54 @@
+
+.enty-content {
+	position: relative;
+	height: 500px;
+	overflow-y: auto;
+}
+.entry-content, .entry-content .stars {
+	background-color: white;
+}
+.entry-content:before {
+	display: none;
+	content: none;
+}
+.entry-content .singlestar {
+	border: 1px solid #eee;
+	border-radius: 10px;
+	box-shadow: 8px 8px 16px #000;
+	width: 850px;
+	margin: 20px auto;
+}
+.entry-content .singlestar .close {
+	display: inline-block;
+	border-top-right-radius: 8px;
+	border-top-left-radius: 8px;
+	width: 842px;
+	background-color: #ddd;
+	padding: 3px 25px;
+	margin: 4px 3px;
+	text-align: right;
+}
+.entry-content .singlestar .close:hover {
+	cursor: pointer;
+}
+.entry-content .singlestar .users {
+	width: 810px;
+	margin: 10px 20px;
+}
+.entry-content .singlestar .snames {
+	display: flex;
+	flex-direction: row;
+	padding: 0px 20px;
+}
+.entry-content .singlestar .names {
+	margin-right: 50px;
+}
+.entry-content .singlestar .footers {
+	display: inline-block;
+	width: 840px;
+	height: 38px;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+	background-color: #eee;
+	margin: 4px 3px;
+}

@@ -1,0 +1,8 @@
+# Mein Plugin
+Das Plugin gibt eine Übersicht über einige unbekannte Künstler. 
+## Installation
+- Laden Sie sich den Ordner mein-plugin aus dem Netz und verschieben Iihn in den Wordpress Plugin Ordner.
+- Erstellen Sie eine neue Seite mit dem Seitentitel "Star overview".
+- Gehen Sie jetzt ins Design->Menü wählen hier Seiten, alle Seiten anzeigen -> die Seite "Star overview" und fügen sie diese in Menü ein.
+
+Jetzt 
