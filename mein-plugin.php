@@ -1,10 +1,12 @@
 <?php
 /*
 Plugin Name: Stars Plugin
-Plugin URI: https://wpwissen.com/wordpress-plugin-erstellen
-Description: Dieses Plugin zeigt unter den einzelnen Artikeln eine Autor Box an. Es dient zur Demonstration für den Artikel "Ein WordPress Plugin erstellen - so geht's", erschienen auf wpwissen.com.
-Author: Peter von wpwissen.com
-Author URI: https://wpwissen.com
+Plugin URI: http://server.my-homeip.de/wp
+Description: Dieses Plugin zeigt in einer Tabelle einige unbekannte Stars. Ein
+klick auf dessen Spalte, öffnet sich ein Fenster, in dem mehr Daten über diesen
+Star angegeben werden.
+Author: Henry Muth
+Author URI: http://server.my-homeip.de/wp
 Version: 1.0.0
 */
 
