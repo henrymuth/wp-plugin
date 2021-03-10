@@ -2,9 +2,9 @@
 /*
 Plugin Name: Stars Plugin
 Plugin URI: http://server.my-homeip.de/wp
-Description: Dieses Plugin zeigt in einer Tabelle einige unbekannte Stars. Ein
-klick auf dessen Spalte, öffnet sich ein Fenster, in dem mehr Daten über diesen
-Star angegeben werden.
+Description: Dieses Plugin zeigt in einer Tabelle einige unbekannte Stars. Beim
+klick auf dessen Spalte, öffnet sich ein Fenster, welches mehr Daten über diesen
+Star enthält.
 Author: Henry Muth
 Author URI: http://server.my-homeip.de/wp
 Version: 1.0.0
