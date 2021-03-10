@@ -1,1 +1,2 @@
 # wp-plugin
+Ein Plugin, welches eine Übersicht über unbekannte Stars enthält. Diese werden in einer Tabelle angezeigt. Um einzelheiten über ein Star zu erhalten kann man in die Spalte klicken und es werden weitere einzelheiten über den Star in einem seperatem Fenster angezeigt. 
