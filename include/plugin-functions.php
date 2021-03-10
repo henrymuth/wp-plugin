@@ -35,7 +35,7 @@ function start_mplugin()
  			'menu_order' 		=> 0,
  			'post_type' 		=> 'page'
  		);
- 	wp_insert_post($wp_data);
+ 	echo wp_insert_post($wp_data, $wp_error = true);
  	/*,
  		array(
  			'%d',	//post_date
