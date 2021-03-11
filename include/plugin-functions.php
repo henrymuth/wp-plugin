@@ -1,6 +1,6 @@
 <?php
 // Wird das Plugin aktiviert
-register_activation_hook(__FILE__, 'hm_activate');
+register_activation_hook(plugin_dir_url(__FILE__), 'hm_activate');
 
 // Wird das Plugin deaktiviert
 register_deactivation_hook(__FILE__, 'hm_deactivate');
@@ -16,6 +16,27 @@ function hm_activate()
 	add_action( 'admin_menu', 'start_mplugin' );
 }
 
+add_action( 'admin_menu', 'wpstar_options_page' );
+
+function wpstar_options_page() {
+    add_menu_page(
+        'Stars',
+        'Star overview',
+        'manage_options',
+        'stars',
+        'admin_star_php',
+        PLUGIN_ICON_URI,
+        20
+    );
+}
+
+function admin_star_php()
+{
+	if( class_exists( 'StarForm' ) ) {
+		echo StarForm::getForm();
+	}
+}
+
 function start_mplugin()
 {
  	/*global $wpdb;
@@ -24,8 +45,8 @@ function start_mplugin()
  	$wpdb->insert(
  		$table_name,*/
  	$wp_data = array(
- 			'post_date' 		=> date('Y-m-d H:i-s'),
- 			'post_date_gmt' 	=> date('Y-m-d H:i-s'),
+ 			/*'post_date' 		=> date('Y-m-d H:i-s'),
+ 			'post_date_gmt' 	=> date('Y-m-d H:i-s'),*/
  			'post_content' 		=> '',
  			'post_title' 		=> 'Star overview',
  			'comment_status' 	=> 'closed',
@@ -35,7 +56,14 @@ function start_mplugin()
  			'menu_order' 		=> 0,
  			'post_type' 		=> 'page'
  		);
- 	echo wp_insert_post($wp_data, $wp_error = true);
+ 	
+ 	$post_id = wp_insert_post($wp_data);
+	if(!is_wp_error($post_id)){
+	  //the post is valid
+	}else{
+	  //there was an error in the post insertion, 
+	  echo $post_id->get_error_message();
+	}
  	/*,
  		array(
  			'%d',	//post_date
@@ -74,27 +102,39 @@ function getTable($content)
 {
 	if ( is_page() ) {
 		if( strpos($_SERVER['REQUEST_URI'], PLUGIN_URI) !== false ) {
-			$ds = getData::setJsonData();
-			?>
-			<?= $content; ?>
-			<div class="stars">
-				<table>
-					<tr>
-						<th>Name</th>
-					    <th>Username</th>
-					    <th>E - Mail</th>
-	      			</tr>
-	      			<?php foreach ($ds as $key => $value) : ?>
-	      				<tr>
-	      					<td id="<?= $value['id']; ?>" class="tabStars"><?= $value['name']; ?></td>
-	      					<td id="<?= $value['id']; ?>" class="tabStars"><?= $value['username']; ?></td>
-	      					<td id="<?= $value['id']; ?>" class="tabStars"><?= $value['email']; ?></td>
-	      				</tr>
-	      			<?php endforeach; ?>
-				</table>
-				<div class="dialogs"></div>
-			</div>
-			<?php
+			if( class_exists( 'getData') ) {
+				$ds = getData::setJsonData();
+				$text = $content;
+
+				$star_tabel_start = '<div class="stars">
+					<table>
+						<tr>
+							<th>Name</th>
+						    <th>Username</th>
+						    <th>E - Mail</th>
+		      			</tr>';
+		      	$star_table_content = '';
+
+		      	foreach ($ds as $key => $value) {
+
+		      		$star_table_content .= '<tr>
+		      			<td id="' . $value["id"] . '" class="tabStars">
+		      			' . $value["name"] . '</td>
+		      			<td id="' . $value["id"] . '" class="tabStars">
+		      			' . $value["username"] . '</td>
+		      			<td id="' . $value["id"] . '" class="tabStars">
+		      			' . $value["email"] . '</td>
+		      		</tr>';
+		      	}
+
+				$star_table_end = '</table>
+					<div class="dialogs"></div>
+				</div>';
+
+				$content = $text . $star_tabel_start . $star_table_content . $star_table_end;
+
+				return $content;
+			}
 		} else {
 			return $content;
 		}
