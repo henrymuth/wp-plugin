@@ -12,7 +12,6 @@ Version: 1.0.0
 
 define('PLUGIN_NAME', 'mein-plugin');
 define('PLUGIN_URI', 'star-overview');
-define('PLUGIN_ICON_URI', plugin_dir_url(__FILE__) . 'images/star.png');
 
 if( file_exists(plugin_dir_path(__FILE__) . 'include/plugin-functions.php') ) {
 	require_once plugin_dir_path(__FILE__) . 'include/plugin-functions.php';
@@ -20,12 +19,6 @@ if( file_exists(plugin_dir_path(__FILE__) . 'include/plugin-functions.php') ) {
 
 if( file_exists(plugin_dir_path(__FILE__) . 'include/plugin-getData.php') ) {
 	require_once plugin_dir_path(__FILE__) . 'include/plugin-getData.php';
-}
-
-if( is_admin() ) {
-	if( file_exists(plugin_dir_path(__FILE__) . 'admin/plugin-star-form.php') ) {
-		require_once plugin_dir_path(__FILE__) . 'admin/plugin-star-form.php';
-	}
 }
 
 add_action('wp_enqueue_scripts', 'add_css_file');
