@@ -3,7 +3,7 @@
 register_activation_hook(plugin_dir_url(__FILE__), 'hm_activate');
 
 // Wird das Plugin deaktiviert
-register_deactivation_hook(__FILE__, 'hm_deactivate');
+register_deactivation_hook(plugin_dir_url(__FILE__), 'hm_deactivate');
 
 // Wird das Plugin deinstalliert
 register_uninstall_hook(__FILE__, 'hm_uninstall');
@@ -13,10 +13,8 @@ register_uninstall_hook(__FILE__, 'hm_uninstall');
 */
 function hm_activate()
 {
-	add_action( 'admin_menu', 'start_mplugin' );
+	add_action( 'admin_menu', 'wpstar_create_new_page' );
 }
-
-add_action( 'admin_menu', 'wpstar_create_new_page' );
 
 function wpstar_create_new_page() {
  	$wp_data = array(
