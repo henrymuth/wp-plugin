@@ -22,8 +22,10 @@ if( file_exists(plugin_dir_path(__FILE__) . 'include/plugin-getData.php') ) {
 	require_once plugin_dir_path(__FILE__) . 'include/plugin-getData.php';
 }
 
-if( file_exists(plugin_dir_path(__FILE__) . 'include/plugin-star-form.php') ) {
-	require_once plugin_dir_path(__FILE__) . 'include/plugin-star-form.php';
+if( is_admin() ) {
+	if( file_exists(plugin_dir_path(__FILE__) . 'admin/plugin-star-form.php') ) {
+		require_once plugin_dir_path(__FILE__) . 'admin/plugin-star-form.php';
+	}
 }
 
 add_action('wp_enqueue_scripts', 'add_css_file');

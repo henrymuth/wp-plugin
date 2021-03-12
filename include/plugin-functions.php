@@ -16,39 +16,15 @@ function hm_activate()
 	add_action( 'admin_menu', 'start_mplugin' );
 }
 
-add_action( 'admin_menu', 'wpstar_options_page' );
+add_action( 'admin_menu', 'wpstar_create_new_page' );
 
-function wpstar_options_page() {
-    add_menu_page(
-        'Stars',
-        'Star overview',
-        'manage_options',
-        'stars',
-        'admin_star_php',
-        PLUGIN_ICON_URI,
-        20
-    );
-}
-
-function admin_star_php()
-{
-	if( class_exists( 'StarForm' ) ) {
-		echo StarForm::getForm();
-	}
-}
-
-function start_mplugin()
-{
- 	/*global $wpdb;
- 	$table_name = $wpdb->prefix . "wp_posts";
-
- 	$wpdb->insert(
- 		$table_name,*/
+function wpstar_create_new_page() {
  	$wp_data = array(
- 			/*'post_date' 		=> date('Y-m-d H:i-s'),
- 			'post_date_gmt' 	=> date('Y-m-d H:i-s'),*/
+ 			'post_date' 		=> date('Y-m-d H:i-s'),
+ 			'post_date_gmt' 	=> date('Y-m-d H:i-s'),
  			'post_content' 		=> '',
  			'post_title' 		=> 'Star overview',
+ 			'post_status'		=> 'publish',
  			'comment_status' 	=> 'closed',
  			'ping_status' 		=> 'closed',
  			'post_name' 		=> 'star-overview',
@@ -64,20 +40,6 @@ function start_mplugin()
 	  //there was an error in the post insertion, 
 	  echo $post_id->get_error_message();
 	}
- 	/*,
- 		array(
- 			'%d',	//post_date
- 			'%d',	//post_date_gmt
- 			'%s',	//post_content
- 			'%s',	//post_title
- 			'%s',	//comment_status
- 			'%s',	//ping_status
- 			'%s',	//post_name
- 			'%s',	//post_name
- 			'%i', 	//menu_order
- 			'%s'	//post_type
- 		)
- 	);*/
 }
 
 /**
@@ -85,11 +47,18 @@ function start_mplugin()
 */
 function hm_deactivate()
 {
-	global $wpdb;
+	add_action('delete_post', 'hm_delete_star');
+}
 
-	$wpdb->delete($wpdb->prefix() . 'posts',
-		array('post_title' => 'Star overview')
-	);
+function hm_delete_star()
+{
+	$starID = get_pages( array( 'post_title' => 'Star overview') );
+
+	foreach ($starID as $value) {
+		if( $value->post_title == 'Star overview') {
+			wp_delete_attachment( $value->ID, true);
+		}
+	}
 }
 
 /**
