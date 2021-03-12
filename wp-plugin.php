@@ -10,7 +10,7 @@ Author URI: http://server.my-homeip.de/wp
 Version: 1.0.0
 */
 
-define('PLUGIN_NAME', 'wp-plugin');
+define('PLUGIN_NAME', 'wp-plugin.php');
 define('PLUGIN_URI', 'star-overview');
 define('PLUGIN_URL', plugin_dir_url(__FILE__) );
 
@@ -27,7 +27,7 @@ add_action('wp_enqueue_scripts', 'add_css_file');
 // CSS Datei einbinden
 function add_css_file()
 {
-	wp_enqueue_style('plugin_style', plugin_dir_url(__FILE__) . 'assets/css/plugin-style.css');
+	wp_enqueue_style('plugin_style', plugin_dir_path(__FILE__) . 'assets/css/plugin-style.css');
 }
 
 // JQuery und Javascript einbinden
