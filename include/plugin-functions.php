@@ -58,13 +58,10 @@ function hm_do_activate()
 	$post_id = $post->ID;
 
 	if( is_admin() )
-	{
-		if( $post_id ) {
-			$wpdb->query($wpdb->prepare("delete from wp_posts where post_title = 'Star overview'"));
+		$wpdb->query($wpdb->prepare("delete from wp_posts where post_title = 'Star overview'"));
 
-			return;
-		} else {
-			$wp_data = array(
+		
+		$wp_data = array(
 					'ID'				=> $post_id,
 		 			'post_content' 		=> '',
 		 			'post_title' 		=> 'Star overview',
@@ -78,10 +75,9 @@ function hm_do_activate()
 		 			'post_parent'		=> 0,
 		 			'menu_order' 		=> 0,
 		 			'post_type' 		=> 'page'
-		 	);
+		 );
 
-			wp_insert_post($wp_data);
-		}
+		wp_insert_post($wp_data);
 	}
 }
 
