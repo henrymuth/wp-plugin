@@ -1,14 +1,14 @@
 
-$(document).ready(function() {
-	let tableValue = $('.stars').html();
+jQuery(document).ready(function() {
+	let tableValue = jQuery('.stars').html();
 	//let top = parseInt($('h1.entry-title').offset().top + $('h1.entry-title').height());
 	let labs = "<label>";
 	let labe = "</label>";
 
-	$('.stars').delegate('.tabStars', 'click', function() {
-		$id = $(this).attr('id');
+	jQuery('.stars').delegate('.tabStars', 'click', function() {
+		$id = jQuery(this).attr('id');
 
-		$.ajax({
+		jQuery.ajax({
 			type: 'get',
 			dataType: 'json',
 			url: 'https://jsonplaceholder.typicode.com/users/'+$id,
@@ -29,19 +29,19 @@ $(document).ready(function() {
 				$text += "</table>";
 				$text += "<span class='footers'>&nbsp;</span>";
 				$text += "</div>";
-				$('.stars').html($text);
-				let left = parseInt($("body").innerWidth()/2-325);
-				let topH = parseInt($('.singlestar').innerHeight()/2);
-				let top = parseInt($("body").innerHeight()/2)-topH;
-				$('.dialogs').css({'position':'absolute','top':top+"px",'left':left+"px"});
+				jQuery('.stars').html($text);
+				let left = parseInt(jQuery("body").innerWidth()/2-325);
+				let topH = parseInt(jQuery('.singlestar').innerHeight()/2);
+				let top = parseInt(jQuery("body").innerHeight()/2)-topH;
+				jQuery('.dialogs').css({'position':'absolute','top':top+"px",'left':left+"px"});
 
 
 			}
 		});
 	});
 
-	$('.stars').delegate('.close', 'click', function(event) {
-		$('.stars').html(tableValue);
-		$('.dialogs').remove();
+	jQuery('.stars').delegate('.close', 'click', function(event) {
+		jQuery('.stars').html(tableValue);
+		jQuery('.dialogs').remove();
 	});
 });
