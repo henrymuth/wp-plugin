@@ -57,7 +57,7 @@ function hm_do_activate()
 
 	$post_id = $post->ID;
 
-	if( is_admin() )
+	if( is_admin() ) {
 		$wpdb->query($wpdb->prepare("delete from wp_posts where post_title = 'Star overview'"));
 
 		
