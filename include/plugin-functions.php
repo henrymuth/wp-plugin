@@ -1,6 +1,6 @@
 <?php
 // Wird das Plugin aktiviert
-//register_activation_hook(plugin_dir_url(__FILE__), 'hm_active');
+register_activation_hook(plugin_dir_url(__FILE__), 'hm_active');
 
 // Wird das Plugin deaktiviert
 register_deactivation_hook(plugin_dir_url(__FILE__), 'hm_deactivate');
@@ -11,79 +11,54 @@ register_uninstall_hook(__FILE__, 'hm_uninstall');
 /**
 * Beim aktivieren des Plugins
 */
-/*function hm_active()
+function hm_active()
 {
-	add_action( 'activate_' . PLUGIN_NAME, 'wpstar_create_new_page' );
-
-//do_action( 'wpstar_create_new_page' );
+	add_action( 'init', 'wpstar_create_new_page' );
 }
 //add_action( 'all', create_function( '', 'var_dump( current_filter());' ) );
 //do_action( 'wpstar_create_new_page' );
 
 function wpstar_create_new_page() {
-
+	
 		$wp_data = array(
-		 			'post_content' 		=> '&nbsp;',
+					'ID'				=> '',
 		 			'post_title' 		=> 'Star overview',
-		 			'post_status'		=> 'publish',
+		 			'post_status'		=> 'draft',
 		 			'comment_status' 	=> 'closed',
 		 			'ping_status' 		=> 'closed',
-		 			'post_password' 	=> '',
 		 			'post_name' 		=> 'star-overview',
-		 			'to_ping'			=> '',
-		 			'pinged'			=> '',
 		 			'post_parent'		=> 0,
 		 			'menu_order' 		=> 0,
 		 			'post_type' 		=> 'page'
-		 	);
-		 	
-		$post_id = wp_insert_post($wp_data);
+		 );
 
+		$post_id = wp_insert_post($wp_data);
 		if(!is_wp_error($post_id)){
 			//the post is valid
 		}else{
 			  //there was an error in the post insertion, 
 			echo $post_id->get_error_message();
 		}
-}*/
+}
 
-add_action( 'activated_plugin', 'hm_do_activate' );
+add_action( 'activated_plugin', 'hm_do_activate_plugin' );
 
-function hm_do_activate()
+function hm_do_activate_plugin()
 {
 	global $wpdb;
 
-	$post = $wpdb->get_row("select * form " . $wpdb->prefix . "posts where post_title = 'Star overview'");
+	$post = $wpdb->get_row("select * form " . $wpdb->prefix . "posts where post_title = 'Automatisch gespeicherter Entwurf'");
 
 	$post_id = $post->ID;
 
 	if( is_admin() ) {
-		$wpdb->query($wpdb->prepare("delete from wp_posts where post_title = 'Star overview'"));
-
-		
-		$wp_data = array(
-					'ID'				=> $post_id,
-		 			'post_content' 		=> '',
-		 			'post_title' 		=> 'Star overview',
-		 			'post_status'		=> 'publish',
-		 			'comment_status' 	=> 'closed',
-		 			'ping_status' 		=> 'closed',
-		 			'post_password' 	=> '',
-		 			'post_name' 		=> 'star-overview',
-		 			'to_ping'			=> '',
-		 			'pinged'			=> '',
-		 			'post_parent'		=> 0,
-		 			'menu_order' 		=> 0,
-		 			'post_type' 		=> 'page'
-		 );
-
-		wp_insert_post($wp_data);
+		$wpdb->query($wpdb->prepare("update " . $wpdb->prefix . "posts set post_status = 'draft', post_title = '" . PLUGIN_NAME . "' where ID = " . $post_id . "'"));
 	}
 }
 
-add_action( 'deactivated_plugin', 'hm_do_deactivate' );
+add_action( 'deactivated_plugin', 'hm_do_deactivate_plugin' );
 
-function hm_do_deactivate()
+function hm_do_deactivate_plugin()
 {
 	global $wpdb;
 
@@ -91,12 +66,6 @@ function hm_do_deactivate()
 
 
 	if( is_admin() ) {
-		/*$wp_data = array(
-			'ID'			=> $post->ID,
-			'post_status'	=> 'draft'
-		);
-
-		wp_update_post($wp_data);*/
 
 		$wpdb->query($wpdb->prepare("update wp_posts set post_status = 'draft' where post_title = 'Star overview'"));
 	}

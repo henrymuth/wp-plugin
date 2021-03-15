@@ -12,6 +12,7 @@ Version: 1.0.0
 
 define('PLUGIN_NAME', 'wp-plugin');
 define('PLUGIN_URI', 'star-overview');
+define('PLUGIN_URL', plugin_dir_url(__FILE__) );
 
 if( file_exists(plugin_dir_path(__FILE__) . 'include/plugin-functions.php') ) {
 	require_once plugin_dir_path(__FILE__) . 'include/plugin-functions.php';
